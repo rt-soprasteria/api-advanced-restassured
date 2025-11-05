@@ -51,8 +51,6 @@ How to Run Tests
 
 ### 1\. Clone the repository
 
-git clone https://github.com/.git
-
 ### 2\. Run tests via Maven
 
 Simply right-click a test in the IDE and select ‘RUN’.
