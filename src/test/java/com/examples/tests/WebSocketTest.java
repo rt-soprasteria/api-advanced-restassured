@@ -1,4 +1,4 @@
-package com.example.tests;
+package com.examples.tests;
 
 import okhttp3.*;
 import org.junit.jupiter.api.Test;

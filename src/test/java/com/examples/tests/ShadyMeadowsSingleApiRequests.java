@@ -1,15 +1,16 @@
-package com.example.tests;
+package com.examples.tests;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class ShadyMeadowsApiTest {
+public class ShadyMeadowsSingleApiRequests {
 
     private static final String BASE_URL = "https://automationintesting.online";
 
@@ -80,13 +81,12 @@ public class ShadyMeadowsApiTest {
 
     @Test
     public void postMessage_ShouldReturnSuccess() {
-        String requestBody = "{"
-                + "\"name\":\"John\","
-                + "\"email\":\"john.doe@gmail.com\","
-                + "\"phone\":\"87778887799\","
-                + "\"subject\":\"1252648563532\","
-                + "\"description\":\"15651635165 35168352 6516965\""
-                + "}";
+        Map<String, Object> requestBody = Map.of(
+                "name", "John",
+                "email", "john.doe@gmail.com",
+                "phone", "87778887799",
+                "subject", "Inquiry booking",
+                "description", "I'd like to book a double room for the weekend!");
 
         Response response = RestAssured
                 .given()
@@ -117,12 +117,11 @@ public class ShadyMeadowsApiTest {
 
     @Test
     public void postMessageInvalidBody_ShouldReturnBadRequest() {
-        String requestBody = "{"
-                + "\"name\":\"John\","
-                + "\"email\":\"john.doe@gmail.com\","
-                + "\"subject\":\"1252648563532\","
-                + "\"description\":\"15651635165 35168352 6516965\""
-                + "}";
+        Map<String, Object> requestBody = Map.of(
+                "name", "John",
+                "email", "john.doe@gmail.com",
+                "subject", "Inquiry booking",
+                "description", "I'd like to book a double room for the weekend!");
 
         Response response = RestAssured
                 .given()
@@ -136,6 +135,7 @@ public class ShadyMeadowsApiTest {
                 .statusCode(400)
                 .extract().response();
 
+        //verify api returns the correct error messages
         List<String> errorMessages = response.jsonPath().getList("");
         System.out.println("Validation errors: " + errorMessages);
         assertThat(errorMessages, hasItems("Phone may not be blank", "Phone must be set"));

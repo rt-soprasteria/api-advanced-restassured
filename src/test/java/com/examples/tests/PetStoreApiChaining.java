@@ -1,4 +1,4 @@
-package com.example.tests;
+package com.examples.tests;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class PetStoreApiChainingTest {
+public class PetStoreApiChaining {
 
     private static final String BASE_URL = "https://petstore.swagger.io/v2";
 
@@ -25,7 +25,7 @@ public class PetStoreApiChainingTest {
                 + "\"status\": \"available\""
                 + "}";
 
-        Response postResponse = given()
+        long petId = given()
                 .baseUri(BASE_URL)
                 .contentType("application/json")
                 .basePath("/pet")
@@ -35,10 +35,10 @@ public class PetStoreApiChainingTest {
                 .post()
                 .then()
                 .statusCode(200)
-                .extract().response();
+                .extract().path("id");
 
         //Store id from the response into variable petId
-        long petId = postResponse.jsonPath().getLong("id");
+        //long petId = postResponse.jsonPath().getLong("id");
         System.out.println("Created pet ID: " + petId);
 
         // Step 2 — PUT update the pet using ID from POST
@@ -64,7 +64,7 @@ public class PetStoreApiChainingTest {
                 .extract().response();
 
         System.out.println("Updated pet: " + putResponse.asString());
-        Thread.sleep(500);
+        Thread.sleep(2000); //Petstore uses a queue which you can't control, so sometimes it takes a while for the update to come through
 
         // Step 3 — GET the updated pet and verify fields
         Response getResponse = given()
