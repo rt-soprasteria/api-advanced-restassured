@@ -3,12 +3,11 @@ package com.exercises.tests;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
 
 public class Exercise3_Hooks {
     static String createdObjectId;
@@ -68,7 +67,7 @@ public class Exercise3_Hooks {
                 .get()
                 .jsonPath().getMap("$");
 
-        assertEquals(((Map)obj.get("data")).get("color"), "Red");
+        Assertions.assertEquals("Red", ((Map)obj.get("data")).get("color"));
         System.out.println("Read: " + obj.values().toString());
     }
 

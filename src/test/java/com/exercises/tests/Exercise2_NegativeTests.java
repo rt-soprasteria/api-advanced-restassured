@@ -21,13 +21,11 @@ public class Exercise2_NegativeTests {
 
     @Test
     public void postObjectInvalidBody_ShouldReturnBadRequest() {
-        String requestBody = "";
-
         RestAssured
                 .given()
                 .baseUri(BASE_URL)
                 .basePath("/objects")
-                .body(requestBody)
+                .body("")
                 .header("Content-Type", "application/json")
                 .when()
                 .post()
