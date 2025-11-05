@@ -88,7 +88,7 @@ public class ShadyMeadowsSingleApiRequests {
                 "subject", "Inquiry booking",
                 "description", "I'd like to book a double room for the weekend!");
 
-        Response response = RestAssured
+        RestAssured
                 .given()
                 .baseUri(BASE_URL)
                 .basePath("/api/message")
@@ -104,7 +104,7 @@ public class ShadyMeadowsSingleApiRequests {
     //Negative Test
     @Test
     public void getRoomByInvalidId_ShouldReturnNotFound() {
-        Response response = RestAssured
+        RestAssured
                 .given()
                 .baseUri(BASE_URL)
                 .basePath("/api/room/10")

@@ -3,7 +3,6 @@ package com.examples.tests;
 import com.examples.models.Message;
 import com.examples.utils.TestDataFactory;
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
 import static org.hamcrest.Matchers.*;
@@ -27,7 +26,7 @@ public class ShadyMeadowsTestDataFactory {
 
     @Test
     public void sendMessageToShadyMeadows() {
-        Response response = RestAssured
+        RestAssured
                 .given()
                 .basePath("/api/message")
                 .header("Content-Type", "application/json")

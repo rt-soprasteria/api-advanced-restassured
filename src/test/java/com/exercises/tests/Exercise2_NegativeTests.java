@@ -1,7 +1,6 @@
 package com.exercises.tests;
 
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 public class Exercise2_NegativeTests {
@@ -9,7 +8,7 @@ public class Exercise2_NegativeTests {
 
     @Test
     public void getObjectByInvalidId_ShouldReturnNotFound() {
-        Response response = RestAssured
+        RestAssured
                 .given()
                 .baseUri(BASE_URL)
                 .basePath("/objects/70")
@@ -24,7 +23,7 @@ public class Exercise2_NegativeTests {
     public void postObjectInvalidBody_ShouldReturnBadRequest() {
         String requestBody = "";
 
-        Response response = RestAssured
+        RestAssured
                 .given()
                 .baseUri(BASE_URL)
                 .basePath("/objects")
