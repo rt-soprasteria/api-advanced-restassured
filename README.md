@@ -28,7 +28,7 @@ Before running the tests, make sure you have the following installed:
     
 *   java -version
     
-*   **Download:** [https://adoptium.net](https://adoptium.net) or [https://www.oracle.com/java/technologies/javase-downloads.html](https://www.oracle.com/java/technologies/javase-downloads.html)
+*   **Download:** [https://www.oracle.com/java/technologies/javase-downloads.html](https://www.oracle.com/java/technologies/javase-downloads.html)
     
 
 ### Apache Maven
