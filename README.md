@@ -45,6 +45,7 @@ Before running the tests, make sure you have the following installed:
 ### IDE
 
 *   **IntelliJ IDEA**
+*   **VS Code**
     
 How to Run Tests
 ----------------
