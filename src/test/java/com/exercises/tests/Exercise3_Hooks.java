@@ -11,70 +11,23 @@ import java.util.Map;
 
 public class Exercise3_Hooks {
     static String createdObjectId;
-    static String baseURI = "https://api.restful-api.dev";
+    static String baseURI = "";
 
     @BeforeAll
     public static void setup() {
         // Create a test object
-        Map<String, Object> obj = Map.of(
-                "name", "Test Object",
-                "data", Map.of("color", "Blue", "price", 99.99)
-        );
-        Response response = RestAssured
-                .given()
-                .baseUri(baseURI)
-                .basePath("/objects")
-                .header("Content-Type", "application/json")
-                .body(obj)
-                .when()
-                .post()
-                .then()
-                .statusCode(200)
-                .extract().response();
-
-        // Store the created object's ID for test & teardown
-        createdObjectId = response.jsonPath().getString("id");
-        System.out.println("Created: " + response.getBody().asString());
+        
     }
 
     @Test
     public void testUpdateObject() {
         // Update the object
-        Map<String, Object> updatedData = Map.of(
-                "name", "Test Object",
-                "data", Map.of("color", "Red", "price", 79.99));
-
-        Response response = RestAssured
-                .given()
-                .baseUri(baseURI)
-                .basePath("/objects/" + createdObjectId)
-                .header("Content-Type", "application/json")
-                .body(updatedData)
-                .when()
-                .put()
-                .then()
-                .statusCode(200)
-                .extract().response();
-
-        System.out.println("Updated: " + response.getBody().asString());
-
-        // Assert the update
-        Map<String, Object> obj = RestAssured
-                .given()
-                .baseUri(baseURI)
-                .basePath("objects/" + createdObjectId)
-                .when()
-                .get()
-                .jsonPath().getMap("$");
-
-        Assertions.assertEquals("Red", ((Map)obj.get("data")).get("color"));
-        System.out.println("Read: " + obj.values().toString());
+        
     }
 
     @AfterAll
     public static void teardown() {
         // Delete the object
-        RestAssured.delete("https://api.restful-api.dev/objects/" + createdObjectId);
-        System.out.println("Deleted item with id: " + createdObjectId);
+        
     }
 }
